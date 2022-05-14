@@ -32,6 +32,20 @@ public class UserService {
         return ResponseEntity.ok(savedUser);
     }
 
+
+//    @Override
+//    public void register(UserData user) throws UserAlreadyExistException {
+//
+//        //Let's check if user already registered with us
+//        if(checkIfUserExist(user.getEmail())){
+//            throw new UserAlreadyExistException("User already exists for this email");
+//        }
+//        UserEntity userEntity = new UserEntity();
+//        BeanUtils.copyProperties(user, userEntity);
+//        encodePassword(userEntity, user);
+//        userRepository.save(userEntity);
+//    }
+
 //    @PostMapping("/login")
 //    public ResponseEntity<String> login(@RequestBody User user) {
 //        Optional<User> userFromDb = userRepository.findByUsername(user.getUsername());

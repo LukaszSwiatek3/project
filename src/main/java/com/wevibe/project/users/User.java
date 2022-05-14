@@ -1,32 +1,30 @@
 package com.wevibe.project.users;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUser")
     private Long idUser;
 
-    @Column(name = "username")
+    @Column(nullable = false, unique = true, length = 45, name = "username")
     private String username;
 
-    @Column(name = "email")
+    @Column(nullable = false, unique = true, length = 45, name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(nullable = false, length = 64, name = "password")
     private String password;
 
-    @Column(name = "enabled")
-    private boolean active;
-
-    @Column(name = "role")
+    @Column(nullable = false, length = 45,name = "role")
     private String roles;
 
+    @Column(nullable = true, name = "enabled")
+    private boolean active;
 
     public User() {
 
@@ -38,7 +36,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
 
     public Long getIdUser() {
         return idUser;
