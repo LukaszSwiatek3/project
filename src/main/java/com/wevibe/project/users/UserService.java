@@ -1,64 +1,50 @@
 package com.wevibe.project.users;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wevibe.project.registration.UserRegistrationModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
 
-@RestController
-public class UserService {
+@Service
+public class UserService implements UserServiceInterface {
+
+    private UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    ObjectMapper objectMapper;
-
-    @GetMapping("/users")
-    public ResponseEntity getUsers() throws JsonProcessingException {
-        List<User> users = userRepository.findAll();
-        return ResponseEntity.ok(objectMapper.writeValueAsString(users));
+    public UserService(UserRepository userRepository) {
+        super();
+        this.userRepository = userRepository;
     }
 
-    @PostMapping("/users")
-    public ResponseEntity addUser(@RequestBody User user) {
-        User savedUser = userRepository.save(user);
-        return ResponseEntity.ok(savedUser);
+    @Override
+    public User save(UserRegistrationModel registrationModel) {
+        User user = new User(registrationModel.getUsername(),
+                registrationModel.getEmail(),
+                passwordEncoder.encode(registrationModel.getPassword()), "USER ROLE");
+
+        return userRepository.save(user);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+    }
 
-//    @Override
-//    public void register(UserData user) throws UserAlreadyExistException {
-//
-//        //Let's check if user already registered with us
-//        if(checkIfUserExist(user.getEmail())){
-//            throw new UserAlreadyExistException("User already exists for this email");
-//        }
-//        UserEntity userEntity = new UserEntity();
-//        BeanUtils.copyProperties(user, userEntity);
-//        encodePassword(userEntity, user);
-//        userRepository.save(userEntity);
-//    }
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(String roles) {
+        return Collections.singleton(new SimpleGrantedAuthority(roles));
 
-//    @PostMapping("/login")
-//    public ResponseEntity<String> login(@RequestBody User user) {
-//        Optional<User> userFromDb = userRepository.findByUsername(user.getUsername());
-//
-//        if (userFromDb.isEmpty() || wrongPassword(userFromDb, user)) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
-//
-//        return ResponseEntity.ok().build();
-//    }
-
-//    private boolean wrongPassword(Optional<User> userFromDb, User user) {
-//        return !userFromDb.get().getPassword().equals(user.getPassword());
-//    }
-
+    }
 }

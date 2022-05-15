@@ -20,7 +20,7 @@ public class User {
     @Column(nullable = false, length = 64, name = "password")
     private String password;
 
-    @Column(nullable = false, length = 45,name = "role")
+    @Column(nullable = false, length = 45, name = "role")
     private String roles;
 
     @Column(nullable = true, name = "enabled")
@@ -30,12 +30,14 @@ public class User {
 
     }
 
-    public User(Long idUser, String username, String email, String password) {
-        this.idUser = idUser;
+    public User(String username, String email, String password, String roles) {
+        super();
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
+
 
     public Long getIdUser() {
         return idUser;
@@ -88,4 +90,5 @@ public class User {
     public String getFullName() {
         return getUsername();
     }
+
 }
