@@ -11,16 +11,16 @@ public class User {
     @Column(name = "idUser")
     private Long idUser;
 
-    @Column(nullable = false, unique = true, length = 45, name = "username")
+    @Column(name = "username", nullable = false, unique = true, length = 45)
     private String username;
 
-    @Column(nullable = false, unique = true, length = 45, name = "email")
+    @Column(name = "email", nullable = false, unique = true, length = 45)
     private String email;
 
-    @Column(nullable = false, length = 64, name = "password")
+    @Column(name = "password", nullable = false, length = 64)
     private String password;
 
-    @Column(nullable = false, length = 45, name = "role")
+    @Column(name = "role", nullable = false, length = 45)
     private String roles;
 
     @Column(nullable = true, name = "enabled")
@@ -85,10 +85,6 @@ public class User {
 
     public void setRoles(String roles) {
         this.roles = roles;
-    }
-
-    public String getFullName() {
-        return getUsername();
     }
 
 }

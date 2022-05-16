@@ -1,19 +1,19 @@
 package com.wevibe.project.events;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "events")
 public class Event {
     @Id
-    @Column(name = "idEvent")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_event")
     private Long idEvent;
-    @Column(name = "name")
+
+    @Column(name = "name_event", nullable = false, unique = false, length = 45)
     private String nameEvent;
-    @Column(name = "startDate")
+
+    @Column(name = "start_date_event", nullable = false, unique = false, length = 45)
     private String startDateEvent;
 
     public Event() {
@@ -49,4 +49,5 @@ public class Event {
     public void setStartDateEvent(String startDateEvent) {
         this.startDateEvent = startDateEvent;
     }
+
 }

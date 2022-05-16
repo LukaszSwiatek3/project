@@ -29,7 +29,7 @@ public class UserService implements UserServiceInterface {
     public User save(UserRegistrationModel registrationModel) {
         User user = new User(registrationModel.getUsername(),
                 registrationModel.getEmail(),
-                passwordEncoder.encode(registrationModel.getPassword()), "USER ROLE");
+                passwordEncoder.encode(registrationModel.getPassword()), "ROLE_USER");
 
         return userRepository.save(user);
     }
@@ -40,7 +40,8 @@ public class UserService implements UserServiceInterface {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
+                user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(String roles) {

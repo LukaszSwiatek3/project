@@ -17,7 +17,7 @@ public class UserRegistrationController {
         this.userService = userService;
     }
 
-    @ModelAttribute("users")
+    @ModelAttribute("user")
     public UserRegistrationModel userRegistrationModel() {
         return new UserRegistrationModel();
     }
