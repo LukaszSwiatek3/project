@@ -1,11 +1,8 @@
 package com.wevibe.project.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,17 +11,61 @@ import java.util.List;
 public class UserController {
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     JdbcTemplate jdbcTemplate;
 
     @GetMapping("")
     public List<User> getAll() {
-        return jdbcTemplate.query("SELECT username, email   FROM users",
-                BeanPropertyRowMapper.newInstance(User.class));
+        return userRepository.getAll();
     }
 
-//    @GetMapping("/{event}")
-//    public List<User> getAllUserTakePartIn(Event event) {
-//        return jdbcTemplate.query("SELECT username u FROM users FULL JOIN events e ON u.id_event = e.id_event WHERE e.name_event=?",
-//                BeanPropertyRowMapper.newInstance(User.class));
+    @GetMapping("/{id}")
+    public User getById(@PathVariable("id") Long id) {
+        return userRepository.getUserById(id);
+    }
+
+//    @GetMapping("/event/{id}")
+//    public List<User> getUserByEvent(@PathVariable("id") Long id) {
+//        return userRepository.getUserByEvent(id);
 //    }
+
+    @PutMapping("/{id}")
+    public int update(@PathVariable("id") Long id, @RequestBody User updatedUser) {
+        User user = userRepository.getUserById(id);
+
+        if (updatedUser != null) {
+            user.setUsername(updatedUser.getUsername());
+            user.setEmail(updatedUser.getEmail());
+
+            userRepository.update(user);
+
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public int partiallyUpdate(@PathVariable("id") Long id, @RequestBody User updatedUser) {
+        User user = userRepository.getUserById(id);
+
+        if (user != null) {
+            if (updatedUser.getUsername() != null) user.setUsername(updatedUser.getUsername());
+            if (updatedUser.getEmail() != null) user.setEmail(updatedUser.getEmail());
+
+            userRepository.update(user);
+
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public int delete(@PathVariable("id") Long id) {
+        return userRepository.delete(id);
+    }
+
 }

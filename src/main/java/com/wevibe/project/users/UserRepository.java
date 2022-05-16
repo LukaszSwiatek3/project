@@ -1,9 +1,38 @@
 package com.wevibe.project.users;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+@Repository
+public class UserRepository {
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    public List<User> getAll() {
+        return jdbcTemplate.query("SELECT username, email FROM users", BeanPropertyRowMapper.newInstance(User.class));
+    }
+
+    public User getUserById(Long id) {
+        return jdbcTemplate.queryForObject("SELECT id_user, username, email FROM users WHERE " + "id_user = ?", BeanPropertyRowMapper.newInstance(User.class), id);
+    }
+
+//    public List<User> getUserByEvent(Event event) {
+//        return jdbcTemplate.query("SELECT username u FROM users FULL JOIN events e ON u.id_event = e.id_event WHERE e.name_event=?",
+//                BeanPropertyRowMapper.newInstance(User.class));
+//    }
+
+    public int update(User user) {
+        return jdbcTemplate.update("UPDATE users SET username=?, email=? WHERE id_user=?", user.getUsername(), user.getEmail(), user.getIdUser());
+    }
+
+
+    public int delete(Long id) {
+        return jdbcTemplate.update("DELETE FROM users WHERE id_user=?", id);
+    }
+
 }

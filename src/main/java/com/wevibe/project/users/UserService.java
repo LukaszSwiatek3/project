@@ -15,28 +15,28 @@ import java.util.Collections;
 @Service
 public class UserService implements UserServiceInterface {
 
-    private UserRepository userRepository;
+    private final UserRepositoryInterface userRepositoryInterface;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepositoryInterface userRepositoryInterface) {
         super();
-        this.userRepository = userRepository;
+        this.userRepositoryInterface = userRepositoryInterface;
     }
 
     @Override
     public User save(UserRegistrationModel registrationModel) {
         User user = new User(registrationModel.getUsername(),
                 registrationModel.getEmail(),
-                passwordEncoder.encode(registrationModel.getPassword()), "ROLE_USER");
+                passwordEncoder.encode(registrationModel.getPassword()), "ROLE_USER", true);
 
-        return userRepository.save(user);
+        return userRepositoryInterface.save(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userRepositoryInterface.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }

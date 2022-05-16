@@ -1,0 +1,46 @@
+{
+"type":"FeatureCollection",
+"query":
+	["puławska",
+	"182",
+	"warszawa"],
+"features":
+	[{"id":"address.1491706061173482",
+	"type":"Feature",
+	"place_type":
+		["address"],
+	"relevance":1,
+	"properties":
+		{"accuracy":"rooftop"},
+	"text":"Puławska",
+	"place_name":"Puławska 182,02-670 Warsaw,Masovian Voivodeship,Poland",
+	"matching_place_name":"Puławska 182,02-670 Warszawa,Masovian Voivodeship,Poland",
+	"center":[21.021819,52.181743],
+	"geometry":
+		{"type":"Point",
+		"coordinates":[21.021819,52.181743]},
+	"address":"182",
+	"context":
+		[{
+		"id":"postcode.4384160617551180",
+		"text":"02-670"
+		},
+		{
+		"id":"place.14390740799224870",
+		"wikidata":"Q270",
+		"text":"Warsaw"
+		},
+		{
+		"id":"region.9375820343691660",
+		"short_code":"PL-MZ",
+		"wikidata":"Q54169",
+		"text":"Masovian Voivodeship"
+		},
+		{
+		"id":"country.6866831442766020",
+		"wikidata":"Q36",
+		"short_code":"pl",
+		"text":"Poland"
+		}]}],
+"attribution":"NOTICE: © 2022 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained. POI(s) provided by Foursquare."
+}

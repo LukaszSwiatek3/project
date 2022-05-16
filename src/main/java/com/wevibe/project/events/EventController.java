@@ -67,4 +67,5 @@ public class EventController {
         return eventRepository.delete(id);
     }
 
+
 }

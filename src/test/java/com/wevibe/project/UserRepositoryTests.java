@@ -1,7 +1,7 @@
 package com.wevibe.project;
 
 import com.wevibe.project.users.User;
-import com.wevibe.project.users.UserRepository;
+import com.wevibe.project.users.UserRepositoryInterface;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -20,7 +20,7 @@ public class UserRepositoryTests {
     private TestEntityManager entityManager;
 
     @Autowired
-    private UserRepository repo;
+    private UserRepositoryInterface repo;
 
     @Test
     public void testCreateUser() {
