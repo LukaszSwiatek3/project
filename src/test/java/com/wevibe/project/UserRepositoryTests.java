@@ -1,7 +1,7 @@
 package com.wevibe.project;
 
 import com.wevibe.project.users.User;
-import com.wevibe.project.users.UserRepositoryInterface;
+import com.wevibe.project.users.repository.UserRepositoryInterface;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

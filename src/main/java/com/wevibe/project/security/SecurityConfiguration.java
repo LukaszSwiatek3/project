@@ -1,6 +1,6 @@
 package com.wevibe.project.security;
 
-import com.wevibe.project.users.UserServiceInterface;
+import com.wevibe.project.users.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

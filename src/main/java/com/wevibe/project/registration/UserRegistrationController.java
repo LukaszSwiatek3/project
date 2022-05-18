@@ -1,6 +1,6 @@
 package com.wevibe.project.registration;
 
-import com.wevibe.project.users.UserService;
+import com.wevibe.project.users.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

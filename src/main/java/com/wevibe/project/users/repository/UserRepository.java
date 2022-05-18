@@ -1,5 +1,6 @@
-package com.wevibe.project.users;
+package com.wevibe.project.users.repository;
 
+import com.wevibe.project.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

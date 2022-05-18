@@ -1,6 +1,8 @@
-package com.wevibe.project.users;
+package com.wevibe.project.users.service;
 
 import com.wevibe.project.registration.UserRegistrationModel;
+import com.wevibe.project.users.User;
+import com.wevibe.project.users.repository.UserRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

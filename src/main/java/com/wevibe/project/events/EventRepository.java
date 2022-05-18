@@ -41,6 +41,4 @@ public class EventRepository {
         return jdbcTemplate.update("DELETE FROM events WHERE id_event=?", id);
     }
 
-
-
 }
