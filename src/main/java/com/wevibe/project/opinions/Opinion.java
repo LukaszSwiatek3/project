@@ -1,5 +1,8 @@
 package com.wevibe.project.opinions;
 
+import com.wevibe.project.events.Event;
+import com.wevibe.project.users.userdetails.UserDetails;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,32 +16,36 @@ public class Opinion {
     private Double rating;
     @Column(name = "description", length = 200)
     private String description;
-    @Column(name = "id_opinion_author", nullable = false)
-    private Long idOpinionAuthor;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "opinion_author", nullable = false)
+    private UserDetails opinionAuthor;
     @Column(name = "opinion_time", nullable = false)
     private String opinionTime;
-    @Column(name = "id_event", nullable = false, length = 10)
-    private Long idEvent;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "opinion_event", nullable = false)
+    private Event opinionEvent;
 
     public Opinion() {
 
     }
 
-    public Opinion(Long idOpinion, Double rating, String description, Long idOpinionAuthor, String opinionTime, Long idEvent) {
+    public Opinion(Long idOpinion, Double rating, String description, UserDetails opinionAuthor, String opinionTime, Event opinionEvent) {
         this.idOpinion = idOpinion;
         this.rating = rating;
         this.description = description;
-        this.idOpinionAuthor = idOpinionAuthor;
+        this.opinionAuthor = opinionAuthor;
         this.opinionTime = opinionTime;
-        this.idEvent = idEvent;
+        this.opinionEvent = opinionEvent;
     }
 
-    public Opinion(Double rating, String description, Long idOpinionAuthor, String opinionTime, Long idEvent) {
+    public Opinion(Double rating, String description, UserDetails opinionAuthor, String opinionTime, Event opinionEvent) {
         this.rating = rating;
         this.description = description;
-        this.idOpinionAuthor = idOpinionAuthor;
+        this.opinionAuthor = opinionAuthor;
         this.opinionTime = opinionTime;
-        this.idEvent = idEvent;
+        this.opinionEvent = opinionEvent;
     }
 
     public Long getIdOpinion() {
@@ -65,20 +72,20 @@ public class Opinion {
         this.description = description;
     }
 
-    public Long getIdOpinionAuthor() {
-        return idOpinionAuthor;
+    public UserDetails getOpinionAuthor() {
+        return opinionAuthor;
     }
 
-    public void setIdOpinionAuthor(Long idOpinionAuthor) {
-        this.idOpinionAuthor = idOpinionAuthor;
+    public void setOpinionAuthor(UserDetails opinionAuthor) {
+        this.opinionAuthor = opinionAuthor;
     }
 
-    public Long getIdEvent() {
-        return idEvent;
+    public Event getOpinionEvent() {
+        return opinionEvent;
     }
 
-    public void setIdEvent(Long idEvent) {
-        this.idEvent = idEvent;
+    public void setOpinionEvent(Event opinionEvent) {
+        this.opinionEvent = opinionEvent;
     }
 
     public String getOpinionTime() {

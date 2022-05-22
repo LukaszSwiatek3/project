@@ -1,4 +1,6 @@
-package com.wevibe.project.ticket;
+package com.wevibe.project.tickets;
+
+import com.wevibe.project.transactions.Transaction;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -15,6 +17,10 @@ public class Ticket {
     private UUID uuidCode;
     @Column(name = "price", nullable = false)
     private Double price;
+
+    @ManyToOne
+    @JoinColumn(name = "transaction_ticket")
+    private Transaction transaction;
 
     public Ticket() {
 

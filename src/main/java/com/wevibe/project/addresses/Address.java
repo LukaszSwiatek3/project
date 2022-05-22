@@ -1,6 +1,11 @@
-package com.wevibe.project.address;
+package com.wevibe.project.addresses;
+
+import com.wevibe.project.events.Event;
+import com.wevibe.project.users.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "addresses")
@@ -20,14 +25,24 @@ public class Address {
     @Column(name = "street", nullable = false, length = 45)
     private String street;
     @Column(name = "street_number", nullable = false)
-    private Integer streetNumber;
+    private String streetNumber;
     @Column(name = "apartment_number")
     private Integer apartmentNumber;
+
+    @OneToMany(mappedBy = "eventAddress")
+    private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userAddress")
+    private List<UserDetails> users = new ArrayList<>();
 
     public Address() {
     }
 
-    public Address(Long idAddress, String nameAddress, String country, String city, String postalCode, String street, Integer streetNumber, Integer apartmentNumber) {
+    public Address(Long idAddress) {
+        this.idAddress = idAddress;
+    }
+
+    public Address(Long idAddress, String nameAddress, String country, String city, String postalCode, String street, String streetNumber, Integer apartmentNumber) {
         this.idAddress = idAddress;
         this.nameAddress = nameAddress;
         this.country = country;
@@ -36,6 +51,19 @@ public class Address {
         this.street = street;
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
+    }
+
+    public Address(Long idAddress, String nameAddress, String country, String city, String postalCode, String street, String streetNumber, Integer apartmentNumber, List<Event> events, List<UserDetails> users) {
+        this.idAddress = idAddress;
+        this.nameAddress = nameAddress;
+        this.country = country;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.apartmentNumber = apartmentNumber;
+        this.events = events;
+        this.users = users;
     }
 
     public Long getIdAddress() {
@@ -62,7 +90,7 @@ public class Address {
         return street;
     }
 
-    public Integer getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
@@ -94,7 +122,7 @@ public class Address {
         this.street = street;
     }
 
-    public void setStreetNumber(Integer streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
@@ -102,8 +130,25 @@ public class Address {
         this.apartmentNumber = apartmentNumber;
     }
 
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<UserDetails> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserDetails> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
         return street + " " + streetNumber + "/" + apartmentNumber + " " + city + " " + country;
     }
 }
+

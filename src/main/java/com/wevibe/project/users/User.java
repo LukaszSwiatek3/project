@@ -23,11 +23,15 @@ public class User {
     @Column(name = "role", nullable = false, length = 45)
     private String roles;
 
-    @Column(nullable = true, name = "enabled")
+    @Column(name = "enabled")
     private boolean active;
 
     public User() {
 
+    }
+
+    public User(Long idUser) {
+        this.idUser = idUser;
     }
 
     public User(String username, String email, String password, String roles, boolean active) {
@@ -38,6 +42,7 @@ public class User {
         this.roles = roles;
         this.active = active;
     }
+
 
     public Long getIdUser() {
         return idUser;

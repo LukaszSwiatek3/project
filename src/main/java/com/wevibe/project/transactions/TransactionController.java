@@ -32,7 +32,7 @@ public class TransactionController {
         Transaction transaction = transactionRepository.getTransactionById(id);
 
         if (transaction != null) {
-            transaction.setIdTickets(updatedTransaction.getIdTickets());
+            transaction.setTickets(updatedTransaction.getTickets());
             transaction.setIdTicketBuyer(updatedTransaction.getIdTicketBuyer());
             transaction.setPurchaseDateTime(updatedTransaction.getPurchaseDateTime());
             transaction.setSummaryCost(updatedTransaction.getSummaryCost());
@@ -50,7 +50,7 @@ public class TransactionController {
         Transaction transaction = transactionRepository.getTransactionById(id);
 
         if (transaction != null) {
-            if (updatedTransaction.getIdTickets() != null) transaction.setIdTickets(updatedTransaction.getIdTickets());
+            if (updatedTransaction.getTickets() != null) transaction.setTickets(updatedTransaction.getTickets());
             if (updatedTransaction.getIdTicketBuyer() != null) transaction.setIdTicketBuyer(updatedTransaction.getIdTicketBuyer());
             if (updatedTransaction.getPurchaseDateTime() != null) transaction.setPurchaseDateTime(updatedTransaction.getPurchaseDateTime());
             if (updatedTransaction.getSummaryCost() != null) transaction.setSummaryCost(updatedTransaction.getSummaryCost());

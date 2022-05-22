@@ -9,7 +9,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/users/details")
 public class UserDetailsController {
-
     @Autowired
     UserDetailsRepository userDetailsRepository;
 
@@ -38,7 +37,7 @@ public class UserDetailsController {
             userDetails.setLastName(updatedUserDetails.getLastName());
             userDetails.setGender(updatedUserDetails.getGender());
             userDetails.setPhoneNumber(updatedUserDetails.getPhoneNumber());
-            userDetails.setAddress(updatedUserDetails.getAddress());
+            userDetails.setUserAddress(updatedUserDetails.getUserAddress());
 
             userDetailsRepository.update(userDetails);
 
@@ -57,7 +56,7 @@ public class UserDetailsController {
             if (updatedUserDetails.getEmail() != null) userDetails.setEmail(updatedUserDetails.getEmail());
             if (updatedUserDetails.getFirstName() != null) userDetails.setFirstName(updatedUserDetails.getFirstName());
             if (updatedUserDetails.getLastName() != null) userDetails.setLastName(updatedUserDetails.getLastName());
-            if (updatedUserDetails.getAddress() != null) userDetails.setAddress(updatedUserDetails.getAddress());
+            if (updatedUserDetails.getUserAddress() != null) userDetails.setUserAddress(updatedUserDetails.getUserAddress());
             if (updatedUserDetails.getGender() != null) userDetails.setGender(updatedUserDetails.getGender());
             if (updatedUserDetails.getPhoneNumber() != null)
                 userDetails.setPhoneNumber(updatedUserDetails.getPhoneNumber());

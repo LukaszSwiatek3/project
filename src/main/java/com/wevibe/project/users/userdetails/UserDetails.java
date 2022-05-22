@@ -1,46 +1,74 @@
 package com.wevibe.project.users.userdetails;
 
+import com.wevibe.project.addresses.Address;
+import com.wevibe.project.events.Event;
+import com.wevibe.project.opinions.Opinion;
 import com.wevibe.project.users.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class UserDetails extends User {
 
-    @Column(name = "first_name", nullable = true)
+    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last_name", nullable = true)
+    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "address", nullable = true)
-    private Integer address;
-    @Column(name = "phone_number", nullable = true)
+
+    @ManyToOne
+    @JoinColumn(name = "address_user")
+    public Address userAddress;
+    @Column(name = "phone_number")
     private Integer phoneNumber;
-    @Column(name = "gender", nullable = true)
+    @Column(name = "gender")
     private Boolean gender;
+    @OneToMany(mappedBy = "organisator")
+    private List<Event> organisedEvents = new ArrayList<>();
+    @ManyToMany(mappedBy = "participants")
+    private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "opinionAuthor", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    private List<Opinion> opinions = new ArrayList<>();
+
 
     public UserDetails() {
 
     }
 
-    public UserDetails(String firstName, String lastName, Integer address, Integer phoneNumber, Boolean gender) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
+    public UserDetails(Long idUser) {
+        super(idUser);
     }
 
-    public UserDetails(String username, String email, String password, String roles, Boolean active, String firstName, String lastName, Integer address, Integer phoneNumber, Boolean gender) {
+    public UserDetails(String username, String email, String password, String roles, boolean active, String firstName, String lastName, Address userAddress, Integer phoneNumber, Boolean gender, List<Event> events, List<Event> organisedEvents, List<Opinion> opinions) {
         super(username, email, password, roles, active);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
+        this.userAddress = userAddress;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
+        this.events = events;
+        this.organisedEvents = organisedEvents;
+        this.opinions = opinions;
     }
+
+    public UserDetails(String firstName, String lastName, Address userAddress, Integer phoneNumber, Boolean gender, List<Event> events, List<Event> organisedEvents, List<Opinion> opinions) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userAddress = userAddress;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.events = events;
+        this.organisedEvents = organisedEvents;
+        this.opinions = opinions;
+    }
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    public void addOrganisedEvent(Event event) {organisedEvents.add(event);}
 
     public String getFirstName() {
         return firstName;
@@ -58,12 +86,28 @@ public class UserDetails extends User {
         this.lastName = lastName;
     }
 
-    public Integer getAddress() {
-        return address;
+    public Address getUserAddress() {
+        return userAddress;
     }
 
-    public void setAddress(Integer address) {
-        this.address = address;
+    public void setUserAddress(Address userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<Event> getOrganisedEvents() {
+        return organisedEvents;
+    }
+
+    public void setOrganisedEvents(List<Event> organisedEvents) {
+        this.organisedEvents = organisedEvents;
     }
 
     public Integer getPhoneNumber() {
@@ -80,6 +124,14 @@ public class UserDetails extends User {
 
     public void setGender(Boolean gender) {
         this.gender = gender;
+    }
+
+    public List<Opinion> getOpinions() {
+        return opinions;
+    }
+
+    public void setOpinions(List<Opinion> opinions) {
+        this.opinions = opinions;
     }
 
     public String getFullName() {

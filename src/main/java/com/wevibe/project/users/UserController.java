@@ -27,11 +27,6 @@ public class UserController {
         return userRepository.getUserById(id);
     }
 
-//    @GetMapping("/event/{id}")
-//    public List<User> getUserByEvent(@PathVariable("id") Long id) {
-//        return userRepository.getUserByEvent(id);
-//    }
-
     @PutMapping("/{id}")
     public int update(@PathVariable("id") Long id, @RequestBody User updatedUser) {
         User user = userRepository.getUserById(id);

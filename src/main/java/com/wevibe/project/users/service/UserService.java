@@ -18,7 +18,6 @@ import java.util.Collections;
 public class UserService implements UserServiceInterface {
 
     private final UserRepositoryInterface userRepositoryInterface;
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 

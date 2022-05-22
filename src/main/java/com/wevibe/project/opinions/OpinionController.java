@@ -45,9 +45,9 @@ public class OpinionController {
         if (opinion != null) {
             opinion.setRating(updatedOpinion.getRating());
             opinion.setDescription(updatedOpinion.getDescription());
-            opinion.setIdOpinionAuthor(updatedOpinion.getIdOpinionAuthor());
+            opinion.setOpinionAuthor(updatedOpinion.getOpinionAuthor());
             opinion.setOpinionTime(updatedOpinion.getOpinionTime());
-            opinion.setIdEvent(updatedOpinion.getIdEvent());
+            opinion.setOpinionEvent(updatedOpinion.getOpinionEvent());
 
             opinionRepository.update(opinion);
 
@@ -64,10 +64,10 @@ public class OpinionController {
         if (opinion != null) {
             if (updatedOpinion.getRating() != null) opinion.setRating(updatedOpinion.getRating());
             if (updatedOpinion.getDescription() != null) opinion.setDescription(updatedOpinion.getDescription());
-            if (updatedOpinion.getIdOpinionAuthor() != null)
-                opinion.setIdOpinionAuthor(updatedOpinion.getIdOpinionAuthor());
+            if (updatedOpinion.getOpinionAuthor() != null)
+                opinion.setOpinionAuthor(updatedOpinion.getOpinionAuthor());
             if (updatedOpinion.getOpinionTime() != null) opinion.setOpinionTime(updatedOpinion.getOpinionTime());
-            if (updatedOpinion.getIdEvent() != null) opinion.setIdEvent(updatedOpinion.getIdEvent());
+            if (updatedOpinion.getOpinionEvent() != null) opinion.setOpinionEvent(updatedOpinion.getOpinionEvent());
 
             opinionRepository.update(opinion);
 

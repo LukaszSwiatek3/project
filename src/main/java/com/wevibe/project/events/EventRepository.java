@@ -13,19 +13,20 @@ public class EventRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+
     public List<Event> getAll() {
-        return jdbcTemplate.query("SELECT id_event, name_event, start_date_event FROM events",
+        return jdbcTemplate.query("SELECT id_event, name_event, start_date_event, end_date_event, limit_of_participants, event_address, event_organisator, description  FROM events",
                 BeanPropertyRowMapper.newInstance(Event.class));
     }
 
     public Event getEventById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT id_event, name_event, start_date_event FROM events WHERE " +
+        return jdbcTemplate.queryForObject("SELECT id_event, name_event, start_date_event, end_date_event, limit_of_participants, event_address, event_organisator, description FROM events WHERE " +
                 "id_event = ?", BeanPropertyRowMapper.newInstance(Event.class), id);
     }
 
     public int save(List<Event> events) {
         events.forEach(event -> jdbcTemplate
-                .update("INSERT INTO events(name_event, start_date_event) VALUES(?, ?)",
+                .update("INSERT INTO events(name_event, start_date_event, end_date_event, limit_of_participants, event_address, event_organisator, description) VALUES(?, ?, ?, ?, ?, ?, ?)",
                         event.getNameEvent(), event.getStartDateEvent()
                 ));
 
@@ -33,8 +34,8 @@ public class EventRepository {
     }
 
     public int update(Event event) {
-        return jdbcTemplate.update("UPDATE events SET name_event=?, start_date_event=? WHERE id_event=?",
-                event.getNameEvent(), event.getStartDateEvent(), event.getIdEvent());
+        return jdbcTemplate.update("UPDATE events SET name_event=?, start_date_event=?, end_date_event=?, limit_of_participants=?, event_address=?, event_organisator=?, description=? WHERE id_event=?",
+                event.getNameEvent(), event.getStartDateEvent(), event.getEndDateEvent(), event.getLimitOfParticipants(), event.getEventAddress(), event.getOrganisator(), event.getDescription(), event.getIdEvent());
     }
 
     public int delete(Long id) {

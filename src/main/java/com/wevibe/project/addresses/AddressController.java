@@ -1,4 +1,4 @@
-package com.wevibe.project.address;
+package com.wevibe.project.addresses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +8,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/addresses")
 public class AddressController {
+
     @Autowired
     AddressRepository addressRepository;
 

@@ -14,40 +14,40 @@ public class OpinionRepository {
     JdbcTemplate jdbcTemplate;
 
     public List<Opinion> getAll() {
-        return jdbcTemplate.query("SELECT id_opinion, rating, description, id_opinion_author, opinion_time, id_event FROM opinions",
+        return jdbcTemplate.query("SELECT id_opinion, rating, opinion_author, opinion_event, opinion_time, description FROM opinions",
                 BeanPropertyRowMapper.newInstance(Opinion.class));
     }
 
     public List<Opinion> getAllByUserId(Long idUser) {
-        return jdbcTemplate.query("SELECT id_opinion, rating, description, id_opinion_author, opinion_time, id_event FROM opinions WHERE "
-                + "id_opinion_author = ?", BeanPropertyRowMapper.newInstance(Opinion.class), idUser);
+        return jdbcTemplate.query("SELECT id_opinion, rating, opinion_author, opinion_event, opinion_time, description FROM opinions WHERE "
+                + "opinion_author = ?", BeanPropertyRowMapper.newInstance(Opinion.class), idUser);
     }
 
     public List<Opinion> getAllByEventId(Long idEvent) {
-        return jdbcTemplate.query("SELECT id_opinion, rating, description, id_opinion_author, opinion_time, id_event FROM opinions WHERE "
-                + "id_event = ?", BeanPropertyRowMapper.newInstance(Opinion.class), idEvent);
+        return jdbcTemplate.query("SELECT id_opinion, rating, opinion_author, opinion_event, opinion_time, description FROM opinions WHERE "
+                + "opinion_event = ?", BeanPropertyRowMapper.newInstance(Opinion.class), idEvent);
     }
 
     public Opinion getOpinionById(Long idOpinion) {
-        return jdbcTemplate.queryForObject("SELECT id_opinion, description, id_event, id_opinion_author, opinion_time, rating FROM opinions WHERE "
-                + "id_opinion = ?", BeanPropertyRowMapper.newInstance(Opinion.class), idOpinion);
+        return jdbcTemplate.queryForObject("SELECT id_opinion, rating, opinion_author, opinion_event, opinion_time, description FROM opinions WHERE "
+                + "opinion_event = ?", BeanPropertyRowMapper.newInstance(Opinion.class), idOpinion);
     }
 
     public int save(List<Opinion> opinions) {
         opinions.forEach(opinion -> jdbcTemplate
-                .update("INSERT INTO opinions(rating, description, id_opinion_author, opinion_time, id_event) " +
+                .update("INSERT INTO opinions(rating, opinion_author, opinion_event, opinion_time, description) " +
                                 "VALUES(?, ?, ?, ?, ?)",
-                        opinion.getRating(), opinion.getDescription(), opinion.getIdOpinionAuthor(),
-                        opinion.getOpinionTime(), opinion.getIdEvent()
+                        opinion.getRating(), opinion.getDescription(), opinion.getOpinionAuthor(),
+                        opinion.getOpinionTime(), opinion.getOpinionEvent()
                 ));
 
         return 1;
     }
 
     public int update(Opinion opinion) {
-        return jdbcTemplate.update("UPDATE opinions SET rating=?, description=?, id_opinion_author=?, opinion_time=?, id_event=? WHERE id_event=?",
-                opinion.getRating(), opinion.getDescription(), opinion.getIdOpinionAuthor(),
-                opinion.getOpinionTime(), opinion.getIdEvent()
+        return jdbcTemplate.update("UPDATE opinions SET rating=?, opinion_author=?, opinion_event=?, opinion_time=?, description=? WHERE id_opinion=?",
+                opinion.getRating(), opinion.getDescription(), opinion.getOpinionAuthor(),
+                opinion.getOpinionTime(), opinion.getOpinionEvent()
         );
     }
 

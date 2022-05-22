@@ -1,6 +1,9 @@
 package com.wevibe.project.transactions;
 
+import com.wevibe.project.tickets.Ticket;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "transactions")
@@ -10,8 +13,9 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_transaction")
     private Long idTransaction;
-    @Column(name = "id_tickets", nullable = false, length = 20)
-    private Long idTickets;
+
+    @OneToMany(mappedBy = "transaction")
+    private List<Ticket> tickets;
     @Column(name = "id_ticket_buyer", nullable = false, length = 20)
     private Long idTicketBuyer;
     @Column(name = "purchase_date_time", nullable = false, length = 45)
@@ -23,16 +27,16 @@ public class Transaction {
 
     }
 
-    public Transaction(Long idTransaction, Long idTickets, Long idTicketBuyer, String purchaseDateTime, Double summaryCost) {
+    public Transaction(Long idTransaction, List<Ticket> tickets, Long idTicketBuyer, String purchaseDateTime, Double summaryCost) {
         this.idTransaction = idTransaction;
-        this.idTickets = idTickets;
+        this.tickets = tickets;
         this.idTicketBuyer = idTicketBuyer;
         this.purchaseDateTime = purchaseDateTime;
         this.summaryCost = summaryCost;
     }
 
-    public Transaction(Long idTickets, Long idTicketBuyer, String purchaseDateTime, Double summaryCost) {
-        this.idTickets = idTickets;
+    public Transaction(List<Ticket> tickets, Long idTicketBuyer, String purchaseDateTime, Double summaryCost) {
+        this.tickets = tickets;
         this.idTicketBuyer = idTicketBuyer;
         this.purchaseDateTime = purchaseDateTime;
         this.summaryCost = summaryCost;
@@ -46,12 +50,12 @@ public class Transaction {
         this.idTransaction = idTransaction;
     }
 
-    public Long getIdTickets() {
-        return idTickets;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setIdTickets(Long idTickets) {
-        this.idTickets = idTickets;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public Long getIdTicketBuyer() {

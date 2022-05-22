@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
-
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -21,11 +20,6 @@ public class UserRepository {
     public User getUserById(Long id) {
         return jdbcTemplate.queryForObject("SELECT id_user, username, email FROM users WHERE " + "id_user = ?", BeanPropertyRowMapper.newInstance(User.class), id);
     }
-
-//    public List<User> getUserByEvent(Event event) {
-//        return jdbcTemplate.query("SELECT username u FROM users FULL JOIN events e ON u.id_event = e.id_event WHERE e.name_event=?",
-//                BeanPropertyRowMapper.newInstance(User.class));
-//    }
 
     public int update(User user) {
         return jdbcTemplate.update("UPDATE users SET username=?, email=? WHERE id_user=?", user.getUsername(), user.getEmail(), user.getIdUser());

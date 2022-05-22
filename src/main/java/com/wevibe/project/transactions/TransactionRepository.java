@@ -24,7 +24,7 @@ public class TransactionRepository {
     public int save(List<Transaction> transactions) {
         transactions.forEach(transaction -> jdbcTemplate
                 .update("INSERT INTO transactions(id_ticket_buyer, id_tickets, purchase_date_time, summary_cost) VALUES(?, ?, ?, ?)",
-                        transaction.getIdTicketBuyer(), transaction.getIdTickets(), transaction.getPurchaseDateTime(), transaction.getSummaryCost()
+                        transaction.getIdTicketBuyer(), transaction.getTickets(), transaction.getPurchaseDateTime(), transaction.getSummaryCost()
                 ));
 
         return 1;
@@ -32,7 +32,7 @@ public class TransactionRepository {
 
     public int update(Transaction transaction) {
         return jdbcTemplate.update("UPDATE transactions SET id_ticket_buyer=?, id_tickets=?, purchase_date_time=?, summary_cost=? WHERE id_transaction=?",
-                transaction.getIdTicketBuyer(), transaction.getIdTickets(), transaction.getPurchaseDateTime(), transaction.getSummaryCost(), transaction.getIdTransaction());
+                transaction.getIdTicketBuyer(), transaction.getTickets(), transaction.getPurchaseDateTime(), transaction.getSummaryCost(), transaction.getIdTransaction());
     }
 
     public int delete(Long id) {

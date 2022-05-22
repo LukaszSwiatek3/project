@@ -13,7 +13,7 @@ public class TagRepository {
     JdbcTemplate jdbcTemplate;
 
     public List<Tag> getAll() {
-        return jdbcTemplate.query("SELECT id_tag, name_tag, comment FROM tags",
+        return jdbcTemplate.query("SELECT id_tag, name_tag,  comment FROM tags",
                 BeanPropertyRowMapper.newInstance(Tag.class));
     }
 

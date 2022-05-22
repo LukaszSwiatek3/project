@@ -8,11 +8,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/events")
 public class EventController {
+
     @Autowired
     EventRepository eventRepository;
-
-//    @Autowired
-//    ObjectMapper objectMapper;
 
     @GetMapping("")
     public List<Event> getAll() {
@@ -36,6 +34,11 @@ public class EventController {
         if (event != null) {
             event.setNameEvent(updatedEvent.getNameEvent());
             event.setStartDateEvent(updatedEvent.getStartDateEvent());
+            event.setEndDateEvent(updatedEvent.getEndDateEvent());
+            event.setLimitOfParticipants(updatedEvent.getLimitOfParticipants());
+            event.setEventAddress(updatedEvent.getEventAddress());
+            event.setOrganisator(updatedEvent.getOrganisator());
+            event.setDescription(updatedEvent.getDescription());
 
             eventRepository.update(event);
 
@@ -52,6 +55,12 @@ public class EventController {
         if (event != null) {
             if (updatedEvent.getNameEvent() != null) event.setNameEvent(updatedEvent.getNameEvent());
             if (updatedEvent.getStartDateEvent() != null) event.setStartDateEvent(updatedEvent.getStartDateEvent());
+            if (updatedEvent.getEndDateEvent() != null) event.setEndDateEvent(updatedEvent.getEndDateEvent());
+            if (updatedEvent.getLimitOfParticipants() != null)
+                event.setLimitOfParticipants(updatedEvent.getLimitOfParticipants());
+            if (updatedEvent.getEventAddress() != null) event.setEventAddress(updatedEvent.getEventAddress());
+            if (updatedEvent.getOrganisator() != null) event.setOrganisator(updatedEvent.getOrganisator());
+            if (updatedEvent.getDescription() != null) event.setDescription(updatedEvent.getDescription());
 
             eventRepository.update(event);
 
