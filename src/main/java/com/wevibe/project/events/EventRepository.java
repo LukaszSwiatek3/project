@@ -27,7 +27,7 @@ public class EventRepository {
     public int save(List<Event> events) {
         events.forEach(event -> jdbcTemplate
                 .update("INSERT INTO events(name_event, start_date_event, end_date_event, limit_of_participants, event_address, event_organisator, description) VALUES(?, ?, ?, ?, ?, ?, ?)",
-                        event.getNameEvent(), event.getStartDateEvent()
+                        event.getNameEvent(), event.getStartDateEvent(), event.getEndDateEvent(), event.getLimitOfParticipants(), event.getEventAddress(), event.getOrganisator(), event.getDescription()
                 ));
 
         return 1;

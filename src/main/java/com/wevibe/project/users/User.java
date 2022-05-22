@@ -43,6 +43,14 @@ public class User {
         this.active = active;
     }
 
+    public User(Long idUser, String username, String email, String password, String roles, boolean active) {
+        this.idUser = idUser;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.active = active;
+    }
 
     public Long getIdUser() {
         return idUser;

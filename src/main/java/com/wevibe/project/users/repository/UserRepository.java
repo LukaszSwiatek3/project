@@ -14,7 +14,7 @@ public class UserRepository {
     JdbcTemplate jdbcTemplate;
 
     public List<User> getAll() {
-        return jdbcTemplate.query("SELECT username, email FROM users", BeanPropertyRowMapper.newInstance(User.class));
+        return jdbcTemplate.query("SELECT id_user, username, email FROM users", BeanPropertyRowMapper.newInstance(User.class));
     }
 
     public User getUserById(Long id) {

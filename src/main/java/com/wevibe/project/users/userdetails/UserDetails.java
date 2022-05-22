@@ -54,6 +54,18 @@ public class UserDetails extends User {
         this.opinions = opinions;
     }
 
+    public UserDetails(Long idUser, String username, String email, String password, String roles, boolean active, String firstName, String lastName, Address userAddress, Integer phoneNumber, Boolean gender, List<Event> organisedEvents, List<Event> events, List<Opinion> opinions) {
+        super(idUser, username, email, password, roles, active);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userAddress = userAddress;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.organisedEvents = organisedEvents;
+        this.events = events;
+        this.opinions = opinions;
+    }
+
     public UserDetails(String firstName, String lastName, Address userAddress, Integer phoneNumber, Boolean gender, List<Event> events, List<Event> organisedEvents, List<Opinion> opinions) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,6 +76,19 @@ public class UserDetails extends User {
         this.organisedEvents = organisedEvents;
         this.opinions = opinions;
     }
+
+    public UserDetails(Long idUser, String firstName, String lastName, Address userAddress, Integer phoneNumber, Boolean gender, List<Event> organisedEvents, List<Event> events, List<Opinion> opinions) {
+        super(idUser);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userAddress = userAddress;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.organisedEvents = organisedEvents;
+        this.events = events;
+        this.opinions = opinions;
+    }
+
     public void addEvent(Event event) {
         events.add(event);
     }
