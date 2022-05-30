@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public class CoordinatesFromMapbox {
 
-    private final String url = "src\\main\\resources\\static\\data.json";
+    private final String url = "src\\main\\resources\\static\\json2.json";
 
     JsonInput jsonInput = new JsonInput();
 

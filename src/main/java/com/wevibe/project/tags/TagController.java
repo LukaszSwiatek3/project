@@ -17,6 +17,11 @@ public class TagController {
         return tagRepository.getAll();
     }
 
+    @GetMapping("/event/{id}")
+    public List<Tag> getAllForEvent(@PathVariable("id") Long id) {
+        return tagRepository.getAllForEvent(id);
+    }
+
 
     @GetMapping("/{id}")
     public Tag getTagById(@PathVariable("id") Long id) {

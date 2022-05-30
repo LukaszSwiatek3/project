@@ -1,10 +1,16 @@
 
 package com.wevibe.project.geolocation.models;
-import com.fasterxml.jackson.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -13,7 +19,7 @@ import java.util.Map;
     "features",
     "attribution"
 })
-
+@Generated("jsonschema2pojo")
 public class Example {
 
     @JsonProperty("type")
@@ -26,18 +32,6 @@ public class Example {
     private String attribution;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    public Example(){
-
-    }
-
-    public Example(String type, List<String> query, List<Feature> features, String attribution, Map<String, Object> additionalProperties) {
-        this.type = type;
-        this.query = query;
-        this.features = features;
-        this.attribution = attribution;
-        this.additionalProperties = additionalProperties;
-    }
 
     @JsonProperty("type")
     public String getType() {
@@ -87,38 +81,6 @@ public class Example {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Example.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("type");
-        sb.append('=');
-        sb.append(((this.type == null)?"<null>":this.type));
-        sb.append(',');
-        sb.append("query");
-        sb.append('=');
-        sb.append(((this.query == null)?"<null>":this.query));
-        sb.append(',');
-        sb.append("features");
-        sb.append('=');
-        sb.append(((this.features == null)?"<null>":this.features));
-        sb.append(',');
-        sb.append("attribution");
-        sb.append('=');
-        sb.append(((this.attribution == null)?"<null>":this.attribution));
-        sb.append(',');
-        sb.append("additionalProperties");
-        sb.append('=');
-        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
     }
 
 }

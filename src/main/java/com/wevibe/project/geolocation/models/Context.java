@@ -1,43 +1,45 @@
 
 package com.wevibe.project.geolocation.models;
 
-import com.fasterxml.jackson.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
+    "text_pl",
     "text",
     "wikidata",
+    "language_pl",
+    "language",
     "short_code"
 })
-
+@Generated("jsonschema2pojo")
 public class Context {
 
     @JsonProperty("id")
     private String id;
+    @JsonProperty("text_pl")
+    private String textPl;
     @JsonProperty("text")
     private String text;
     @JsonProperty("wikidata")
     private String wikidata;
+    @JsonProperty("language_pl")
+    private String languagePl;
+    @JsonProperty("language")
+    private String language;
     @JsonProperty("short_code")
     private String shortCode;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    public Context(){
-
-    }
-
-    public Context(String id, String text, String wikidata, String shortCode, Map<String, Object> additionalProperties) {
-        this.id = id;
-        this.text = text;
-        this.wikidata = wikidata;
-        this.shortCode = shortCode;
-        this.additionalProperties = additionalProperties;
-    }
 
     @JsonProperty("id")
     public String getId() {
@@ -47,6 +49,16 @@ public class Context {
     @JsonProperty("id")
     public void setId(String id) {
         this.id = id;
+    }
+
+    @JsonProperty("text_pl")
+    public String getTextPl() {
+        return textPl;
+    }
+
+    @JsonProperty("text_pl")
+    public void setTextPl(String textPl) {
+        this.textPl = textPl;
     }
 
     @JsonProperty("text")
@@ -69,6 +81,26 @@ public class Context {
         this.wikidata = wikidata;
     }
 
+    @JsonProperty("language_pl")
+    public String getLanguagePl() {
+        return languagePl;
+    }
+
+    @JsonProperty("language_pl")
+    public void setLanguagePl(String languagePl) {
+        this.languagePl = languagePl;
+    }
+
+    @JsonProperty("language")
+    public String getLanguage() {
+        return language;
+    }
+
+    @JsonProperty("language")
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     @JsonProperty("short_code")
     public String getShortCode() {
         return shortCode;
@@ -87,38 +119,6 @@ public class Context {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Context.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("id");
-        sb.append('=');
-        sb.append(((this.id == null)?"<null>":this.id));
-        sb.append(',');
-        sb.append("text");
-        sb.append('=');
-        sb.append(((this.text == null)?"<null>":this.text));
-        sb.append(',');
-        sb.append("wikidata");
-        sb.append('=');
-        sb.append(((this.wikidata == null)?"<null>":this.wikidata));
-        sb.append(',');
-        sb.append("shortCode");
-        sb.append('=');
-        sb.append(((this.shortCode == null)?"<null>":this.shortCode));
-        sb.append(',');
-        sb.append("additionalProperties");
-        sb.append('=');
-        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
     }
 
 }

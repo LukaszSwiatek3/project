@@ -23,6 +23,16 @@ public class UserDetailsRepository {
                 "id_user = ?", BeanPropertyRowMapper.newInstance(UserDetails.class), id);
     }
 
+    public List<UserDetails> getAllAtEvent(Long id){
+        return jdbcTemplate.query("SELECT id_user, username, email, first_name, last_name, address_user, phone_number, gender \n" +
+                "FROM users u\n" +
+                "JOIN events_users eu ON u.id_user = eu.user_id\n" +
+                "JOIN events e ON e.id_event = eu.event_id\n" +
+                "WHERE id_event = ?; ",
+                BeanPropertyRowMapper.newInstance(UserDetails.class), id);
+
+    }
+
     public int update(UserDetails userDetails) {
         return jdbcTemplate.update("UPDATE users SET username=?, email=?, first_name=?, last_name=?, address_user=?, phone_number=?, gender=? WHERE users.id_user=?",
                 userDetails.getUsername(), userDetails.getEmail(), userDetails.getFirstName(), userDetails.getLastName(), userDetails.getUserAddress(), userDetails.getPhoneNumber(), userDetails.getGender(), userDetails.getIdUser());

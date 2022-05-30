@@ -25,6 +25,10 @@ public class UserDetailsController {
         return userDetailsRepository.getUserDetailsById(id);
     }
 
+    @GetMapping("event/{id}")
+    public List<UserDetails> getAllAtEvent(@PathVariable("id") Long id) {
+        return userDetailsRepository.getAllAtEvent(id);
+    }
 
     @PutMapping("/{id}")
     public int update(@PathVariable("id") Long id, @RequestBody UserDetails updatedUserDetails) {

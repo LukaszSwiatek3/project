@@ -17,6 +17,15 @@ public class TagRepository {
                 BeanPropertyRowMapper.newInstance(Tag.class));
     }
 
+    public List<Tag> getAllForEvent(Long id) {
+        return jdbcTemplate.query("SELECT id_tag, name_tag,  comment \n" +
+                        "FROM tags t\n" +
+                        "JOIN events_tags et ON t.id_tag = et.tag_id\n" +
+                        "JOIN events e ON e.id_event = et.event_id\n" +
+                        "WHERE " + "id_event = ?",
+                BeanPropertyRowMapper.newInstance(Tag.class), id);
+    }
+
     public Tag getTagById(Long id) {
         return jdbcTemplate.queryForObject("SELECT id_tag, name_tag, comment " +
                 "FROM tags WHERE " + "id_tag = ?", BeanPropertyRowMapper.newInstance(Tag.class), id);

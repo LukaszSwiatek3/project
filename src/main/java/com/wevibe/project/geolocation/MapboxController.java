@@ -15,4 +15,19 @@ public class MapboxController {
         return coordinatesFromMapbox.getCoordinates();
     }
 
+    @GetMapping("/map")
+    public List<Double> mapboxGeocoding() throws IOException, InterruptedException {
+        GeocoderMapbox geocoder = new GeocoderMapbox();
+        String query = "łazienkowska 6A/ Warszawa Polska";
+        return geocoder.getGeolocation(query);
+    }
+
+    @GetMapping("/map2")
+    public List<Double> mapbox() throws IOException, InterruptedException {
+        CoordinatesFromMapbox coordinates = new CoordinatesFromMapbox();
+
+        String query = "łazienkowska 6A/ Warszawa Polska";
+        return coordinates.getCoordinates();
+    }
+
 }

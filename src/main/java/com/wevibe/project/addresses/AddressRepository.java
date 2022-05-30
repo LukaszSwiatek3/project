@@ -23,6 +23,20 @@ public class AddressRepository {
                 + "FROM addresses WHERE " + "id_address = ?", BeanPropertyRowMapper.newInstance(Address.class), id);
     }
 
+    public Address getAddressForEvent(Long id){
+        return jdbcTemplate.queryForObject("SELECT id_event, a.name_address, a.city, a.country, a.postal_code, a.street, a.street_number, a.apartment_number\n" +
+                "FROM events e\n" +
+                "JOIN addresses a ON e.event_address = a.id_address\n" +
+                "WHERE " + "id_event =?", BeanPropertyRowMapper.newInstance(Address.class), id);
+    }
+
+    public List<Address> getAddressesForEvent(){
+        return jdbcTemplate.query("SELECT id_event, a.name_address, a.city, a.country, a.postal_code, a.street, a.street_number, a.apartment_number\n" +
+                "FROM events e\n" +
+                "JOIN addresses a ON e.event_address = a.id_address\n" +
+                "WHERE " + "event_address is NOT NULL", BeanPropertyRowMapper.newInstance(Address.class));
+    }
+
     public int save(Address addresses) {
         jdbcTemplate.update("INSERT INTO addresses(name_address, city, country, postal_code, street, street_number, apartment_number) "
                 + "VALUES(?, ?, ?, ?, ?, ?, ?)", addresses.getNameAddress(), addresses.getCity(), addresses.getCountry(), addresses.getPostalCode(), addresses.getStreet(), addresses.getStreetNumber(), addresses.getApartmentNumber());

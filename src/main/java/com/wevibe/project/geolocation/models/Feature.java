@@ -1,11 +1,16 @@
 
 package com.wevibe.project.geolocation.models;
 
-import com.fasterxml.jackson.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -14,15 +19,16 @@ import java.util.Map;
     "place_type",
     "relevance",
     "properties",
+    "text_pl",
+    "place_name_pl",
     "text",
     "place_name",
-    "matching_place_name",
     "center",
     "geometry",
     "address",
     "context"
 })
-
+@Generated("jsonschema2pojo")
 public class Feature {
 
     @JsonProperty("id")
@@ -35,12 +41,14 @@ public class Feature {
     private Double relevance;
     @JsonProperty("properties")
     private Properties properties;
+    @JsonProperty("text_pl")
+    private String textPl;
+    @JsonProperty("place_name_pl")
+    private String placeNamePl;
     @JsonProperty("text")
     private String text;
     @JsonProperty("place_name")
     private String placeName;
-    @JsonProperty("matching_place_name")
-    private String matchingPlaceName;
     @JsonProperty("center")
     private List<Double> center = null;
     @JsonProperty("geometry")
@@ -51,26 +59,6 @@ public class Feature {
     private List<Context> context = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    public Feature() {
-
-    }
-
-    public Feature(String id, String type, List<String> placeType, Double relevance, Properties properties, String text, String placeName, String matchingPlaceName, List<Double> center, Geometry geometry, String address, List<Context> context, Map<String, Object> additionalProperties) {
-        this.id = id;
-        this.type = type;
-        this.placeType = placeType;
-        this.relevance = relevance;
-        this.properties = properties;
-        this.text = text;
-        this.placeName = placeName;
-        this.matchingPlaceName = matchingPlaceName;
-        this.center = center;
-        this.geometry = geometry;
-        this.address = address;
-        this.context = context;
-        this.additionalProperties = additionalProperties;
-    }
 
     @JsonProperty("id")
     public String getId() {
@@ -122,6 +110,26 @@ public class Feature {
         this.properties = properties;
     }
 
+    @JsonProperty("text_pl")
+    public String getTextPl() {
+        return textPl;
+    }
+
+    @JsonProperty("text_pl")
+    public void setTextPl(String textPl) {
+        this.textPl = textPl;
+    }
+
+    @JsonProperty("place_name_pl")
+    public String getPlaceNamePl() {
+        return placeNamePl;
+    }
+
+    @JsonProperty("place_name_pl")
+    public void setPlaceNamePl(String placeNamePl) {
+        this.placeNamePl = placeNamePl;
+    }
+
     @JsonProperty("text")
     public String getText() {
         return text;
@@ -140,16 +148,6 @@ public class Feature {
     @JsonProperty("place_name")
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
-    }
-
-    @JsonProperty("matching_place_name")
-    public String getMatchingPlaceName() {
-        return matchingPlaceName;
-    }
-
-    @JsonProperty("matching_place_name")
-    public void setMatchingPlaceName(String matchingPlaceName) {
-        this.matchingPlaceName = matchingPlaceName;
     }
 
     @JsonProperty("center")
@@ -200,70 +198,6 @@ public class Feature {
     @JsonAnySetter
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Feature.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("id");
-        sb.append('=');
-        sb.append(((this.id == null)?"<null>":this.id));
-        sb.append(',');
-        sb.append("type");
-        sb.append('=');
-        sb.append(((this.type == null)?"<null>":this.type));
-        sb.append(',');
-        sb.append("placeType");
-        sb.append('=');
-        sb.append(((this.placeType == null)?"<null>":this.placeType));
-        sb.append(',');
-        sb.append("relevance");
-        sb.append('=');
-        sb.append(((this.relevance == null)?"<null>":this.relevance));
-        sb.append(',');
-        sb.append("properties");
-        sb.append('=');
-        sb.append(((this.properties == null)?"<null>":this.properties));
-        sb.append(',');
-        sb.append("text");
-        sb.append('=');
-        sb.append(((this.text == null)?"<null>":this.text));
-        sb.append(',');
-        sb.append("placeName");
-        sb.append('=');
-        sb.append(((this.placeName == null)?"<null>":this.placeName));
-        sb.append(',');
-        sb.append("matchingPlaceName");
-        sb.append('=');
-        sb.append(((this.matchingPlaceName == null)?"<null>":this.matchingPlaceName));
-        sb.append(',');
-        sb.append("center");
-        sb.append('=');
-        sb.append(((this.center == null)?"<null>":this.center));
-        sb.append(',');
-        sb.append("geometry");
-        sb.append('=');
-        sb.append(((this.geometry == null)?"<null>":this.geometry));
-        sb.append(',');
-        sb.append("address");
-        sb.append('=');
-        sb.append(((this.address == null)?"<null>":this.address));
-        sb.append(',');
-        sb.append("context");
-        sb.append('=');
-        sb.append(((this.context == null)?"<null>":this.context));
-        sb.append(',');
-        sb.append("additionalProperties");
-        sb.append('=');
-        sb.append(((this.additionalProperties == null)?"<null>":this.additionalProperties));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
     }
 
 }

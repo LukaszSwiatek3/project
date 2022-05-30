@@ -22,6 +22,16 @@ public class EventController {
         return eventRepository.getEventById(id);
     }
 
+    @GetMapping("/address/{id}")
+    public List<Event> getAllAddress(@PathVariable("id") Long id) {
+        return eventRepository.getAllAddress(id);
+    }
+
+    @GetMapping("/tag/{id}")
+    public List<Event> getAllTag(@PathVariable("id") Long id) {
+        return eventRepository.getAllForTag(id);
+    }
+
     @PostMapping("")
     public int add(@RequestBody List<Event> events) {
         return eventRepository.save(events);
